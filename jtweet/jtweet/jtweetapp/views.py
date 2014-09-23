@@ -1,9 +1,17 @@
+from django.contrib import messages
+from django.contrib.auth import login
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.translation import ugettext as _
+# from jtweet.forms import SignInForm
+# Create your views here.
 
 def index(request):
-	return render_to_response('jtweetapp/index.html',{},context_instance=RequestContext(request))
-
+    return render_to_response('jtweetapp/index.html',
+        {},
+                              context_instance=RequestContext(request))
 
 
 def followers(request):
@@ -11,3 +19,5 @@ def followers(request):
     return render_to_response('jtweetapp/followers.html',
                               {'followers': user.followers.all()},
                               context_instance=RequestContext(request))
+
+

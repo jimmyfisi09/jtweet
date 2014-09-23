@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from jtweet.jtweetapp.models import Jtweet
 from jtweet.jtweetapp.forms import JtweetUserChangeForm, JtweetUserCreationForm
 
+# Register your models here.
 
 
 class JtweetUserAdmin(UserAdmin):
@@ -22,11 +23,11 @@ class JtweetUserAdmin(UserAdmin):
         (_('Jtweet fields'), {'fields': ('followings',)}),
     )
 
+
 class JtweetAdmin(admin.ModelAdmin):
-     #pass
-     list_display = ('text', 'owner')
-     search_fields = ('text',)
+    # pass
+    list_display = ('text', 'owner')
+    search_fields = ('text',)
 
 admin.site.register(get_user_model(), JtweetUserAdmin)
-admin.site.register(Jtweet,JtweetAdmin)
-
+admin.site.register(Jtweet, JtweetAdmin)
