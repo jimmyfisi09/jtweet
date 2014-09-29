@@ -13,7 +13,7 @@ class JtweetUserAdmin(UserAdmin):
 
     form = JtweetUserChangeForm
     add_form = JtweetUserCreationForm
-    #filter_horizontal = UserAdmin.filter_horizontal + ('followings',)
+    filter_horizontal = UserAdmin.filter_horizontal + ('followings',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),

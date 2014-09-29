@@ -39,3 +39,24 @@ class JtweetUserChangeForm(UserChangeForm):
         self.fields['followings'].queryset = self.fields['followings'].queryset.exclude(pk=self.instance.pk)
 
 
+
+class SignInForm(forms.ModelForm):
+     remember_me = forms.BooleanField(label=_('Remember me'),
+                                      required=False,
+                                      initial=True)
+
+     class Meta:
+         model = get_user_model()
+         fields = ('username', 'password')
+         widgets = {'password': forms.PasswordInput}
+
+     def clean(self):
+         cleaned_data = super(SignInForm, self).clean()
+         self._validate_unique = False
+         username = cleaned_data['username']
+         password = cleaned_data['password']
+         user = authenticate(username=username, password=password)
+         if not user:
+             raise forms.ValidationError(_('Username and password are invalid'))
+         self.user = user
+         return cleaned_data
